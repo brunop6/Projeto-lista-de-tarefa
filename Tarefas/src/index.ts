@@ -12,17 +12,26 @@ function listarTarefas() {
 		let todoElement = document.createElement("li");
 		let tarefaText = document.createTextNode(item);
 
-		let linkElement = document.createElement("a");
-		let linkText = document.createTextNode("Excluir");
-		
-		linkElement.setAttribute("href", "#");
-		linkElement.setAttribute("onclick", `deletarTarefa(${index})`);
-		linkElement.setAttribute("style", "margin-left: 10px");
+		let editElement = document.createElement("a");
+		let editText = document.createTextNode("Editar");
 
-		linkElement.appendChild(linkText);
+		let deleteElement = document.createElement("a");
+		let deleteText = document.createTextNode("Excluir");
+
+		editElement.setAttribute("href", "#");
+		editElement.setAttribute("onclick", `editarTarefa(${index})`);
+		editElement.setAttribute("style", "color: Orange;");
+		
+		deleteElement.setAttribute("href", "#");
+		deleteElement.setAttribute("onclick", `deletarTarefa(${index})`);
+		deleteElement.setAttribute("style", "color: Red;");
+
+		editElement.appendChild(editText);
+		deleteElement.appendChild(deleteText);
 		
 		todoElement.appendChild(tarefaText);
-		todoElement.appendChild(linkElement);
+		todoElement.appendChild(editElement);
+		todoElement.appendChild(deleteElement);
 		
 		listElement.appendChild(todoElement);
 	});
@@ -44,8 +53,17 @@ function adicionarTarefa() {
 	}
 }
 
-function salvarDados() {
-	localStorage.setItem("@listagemTarefas", JSON.stringify(tarefas))
+function editarTarefa(posicao: number) {
+	let newText = prompt("Renomeie a tarefa:");
+
+	if(newText!.length < 3){
+		return false;
+	}
+
+	tarefas[posicao] = <string>newText;
+
+	listarTarefas();
+	salvarDados();
 }
 
 function deletarTarefa(posicao: number) {
@@ -53,6 +71,10 @@ function deletarTarefa(posicao: number) {
 
 	listarTarefas();
 	salvarDados();
+}
+
+function salvarDados() {
+	localStorage.setItem("@listagemTarefas", JSON.stringify(tarefas))
 }
 
 listarTarefas();
