@@ -11,12 +11,29 @@
 </head>
 
 <body>
-	<div class="box">
-		<div id="app">
-			<h1>Minhas Tarefas</h1>
+	<h1>Minhas Tarefas</h1>
+
+	<input type="text" placeholder="Digite uma tarefa..." />
+	<select name="stage" id="stage">
+		<option value="0">To Do</option>
+		<option value="1">In Progress</option>
+		<option value="2">Done</option>
+	</select>
+	<button id="add">Adicionar</button>
 	
-			<input type="text" placeholder="Digite uma tarefa..." />
-			<button>Adicionar</button>
+	<div class="box">
+		<div class="toDo">
+			<h2>To Do</h2>
+			<ul></ul>
+		</div>
+
+		<div class="inProgress">
+			<h2>In Progress</h2>
+			<ul></ul>
+		</div>
+
+		<div class="done">
+			<h2>Done</h2>
 			<ul></ul>
 		</div>
 	</div>
